@@ -18,7 +18,8 @@ Le projet "AfterWatch" semble être une plateforme de gestion de séries/films a
 
 2. Architecture proposée
 
-f12b298a322407d4b7a96c40e8d4d1e3
+![alt text](image.png)
+
 3. Fonctionnalités en JavaScript natif
 
     Système de recherche
