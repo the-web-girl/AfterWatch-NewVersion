@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AfterWatch - Accueil</title>
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+<body>
+    <header>
+            <h1>🎬 AfterWatch</h1>
+        <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#watchlist">Ma Watchlist</a></li>
+        </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="liste-series">
+        <h2>Séries & Films populaires</h2>
+        <div class="card-container">
+            <article class="card">
+            <img src="assets/breakingbad.jpg" alt="Breaking Bad">
+            <h3>Breaking Bad</h3>
+            <button onclick="ajouterWatchlist('Breaking Bad')">+ Ajouter</button>
+            </article>
+            <article class="card">
+            <img src="assets/strangerthings.jpg" alt="Stranger Things">
+            <h3>Stranger Things</h3>
+            <button onclick="ajouterWatchlist('Stranger Things')">+ Ajouter</button>
+            </article>
+            <article class="card">
+            <img src="assets/interstellar.jpg" alt="Interstellar">
+            <h3>Interstellar</h3>
+            <button onclick="ajouterWatchlist('Interstellar')">+ Ajouter</button>
+            </article>
+        </div>
+        </section>
+
+        <section id="watchlist">
+        <h2>🎞️ Ma Watchlist</h2>
+        <ul id="liste-watchlist">
+            <!-- Liste dynamique -->
+        </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AfterWatch - Projet HTML/SCSS/JS</p>
+    </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
