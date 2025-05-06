@@ -1,57 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>AfterWatch - Accueil</title>
-        <link rel="stylesheet" href="css/styles.css" />
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AfterWatch - Accueil</title>
+
+    <!-- LINKS -->
+<link rel="stylesheet" href="./styles/style.css">
+
+</head>
 <body>
+
     <header>
-            <h1>🎬 AfterWatch</h1>
+        <h1>🎬 AfterWatch</h1>
+
         <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="#watchlist">Ma Watchlist</a></li>
-        </ul>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#watchlist">Ma Watchlist</a></li>
+                <li><a href="#seenlist">Films & Séries vus</a></li>
+            </ul>
         </nav>
+
+        <form class="search-bar" role="search" aria-label="Recherche dans les contenus" onsubmit="return false;">
+            <label for="search-input" class="visually-hidden">Rechercher un titre, un acteur, un réalisateur ou un genre</label>
+            <input type="text" id="search-input" name="search" placeholder="Rechercher par titre, acteur, réalisateur, genre..." aria-describedby="search-error">
+            <button type="button" id="search-button" aria-label="Lancer la recherche">Rechercher</button>
+            <p id="search-error" class="sr-only" role="alert" aria-live="polite"></p>
+        </form>
     </header>
 
-
     <main>
-        <section id="liste-series">
-        <h2>Séries & Films populaires</h2>
-        <div class="card-container">
-            <article class="card">
-            <img src="assets/breakingbad.jpg" alt="Breaking Bad">
-            <h3>Breaking Bad</h3>
-            <button onclick="ajouterWatchlist('Breaking Bad')">+ Ajouter</button>
-            </article>
-            <article class="card">
-            <img src="assets/strangerthings.jpg" alt="Stranger Things">
-            <h3>Stranger Things</h3>
-            <button onclick="ajouterWatchlist('Stranger Things')">+ Ajouter</button>
-            </article>
-            <article class="card">
-            <img src="assets/interstellar.jpg" alt="Interstellar">
-            <h3>Interstellar</h3>
-            <button onclick="ajouterWatchlist('Interstellar')">+ Ajouter</button>
-            </article>
-        </div>
-        </section>
 
-        <section id="watchlist">
-        <h2>🎞️ Ma Watchlist</h2>
-        <ul id="liste-watchlist">
-            <!-- Liste dynamique -->
-        </ul>
-        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 AfterWatch - Projet HTML/SCSS/JS</p>
     </footer>
-
-  <script src="js/main.js"></script>
+    
+    <!-- SCRIPTS -->
+     <script src="./scripts/search.js"></script>
+     <script src="./scripts/main.js"></script>
 </body>
 </html>
