@@ -1,0 +1,91 @@
+#watchlist,  #seenlist {
+    margin: 2rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 80%;
+
+    ul {
+        list-style: none;
+        background-color: #2c2c2c;
+        border-radius: 10px;
+        padding: 1rem;
+
+        li {
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: #2a2a2a;
+            border-radius: 5px;
+            color: #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+
+            button {
+                background-color: #00adb5;
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover,
+                &:focus {
+                  background-color: #008b93;
+                  outline: 3px solid #00adb5;
+                }
+            }
+        }
+    }
+}
+
+#watchlist {
+    h2 {
+        color: #f39c12;
+    }
+    li {
+        border: 2px solid #f39c12;
+
+        button {
+            background-color: #f39c12;
+
+            &:hover,
+            &:focus {
+                background-color: #e67e22;
+            }
+        }
+    }
+} 
+
+#seenlist {
+    h2 {
+        /* color: #2ecc71; */
+        color: #2ecc71; /* Couleur du titre */
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        visibility: visible !important;  /* Assurez-vous que la visibilité est activée */
+    }
+    li {
+        border: 2px solid #2ecc71;
+
+        button {
+            background-color: #2ecc71;
+
+            &:hover,
+            &:focus {
+                background-color: #27ae60;
+            }
+        }
+        
+    }
+}
+
+/* Accessibilité - Focus visible */
+button:focus {
+    outline: 3px solid #00adb5;
+    outline-offset: 2px;
+}
