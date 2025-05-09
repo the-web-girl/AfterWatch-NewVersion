@@ -1,3 +1,80 @@
+@charset "UTF-8";
+#watchlist, #seenlist {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 80%;
+}
+#watchlist ul, #seenlist ul {
+  list-style: none;
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  padding: 1rem;
+}
+#watchlist ul li, #seenlist ul li {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #2a2a2a;
+  border-radius: 5px;
+  color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+#watchlist ul li button, #seenlist ul li button {
+  background-color: #00adb5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#watchlist ul li button:hover, #watchlist ul li button:focus, #seenlist ul li button:hover, #seenlist ul li button:focus {
+  background-color: #008b93;
+  outline: 3px solid #00adb5;
+}
+
+#watchlist h2 {
+  color: #f39c12;
+}
+#watchlist li {
+  border: 2px solid #f39c12;
+}
+#watchlist li button {
+  background-color: #f39c12;
+}
+#watchlist li button:hover, #watchlist li button:focus {
+  background-color: #e67e22;
+}
+
+#seenlist h2 {
+  /* color: #2ecc71; */
+  color: #2ecc71; /* Couleur du titre */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  visibility: visible !important; /* Assurez-vous que la visibilité est activée */
+}
+#seenlist li {
+  border: 2px solid #2ecc71;
+}
+#seenlist li button {
+  background-color: #2ecc71;
+}
+#seenlist li button:hover, #seenlist li button:focus {
+  background-color: #27ae60;
+}
+
+/* Accessibilité - Focus visible */
+button:focus {
+  outline: 3px solid #00adb5;
+  outline-offset: 2px;
+}
+
 :root {
   --bg-color: #121212;
   --bg-color2: #1e1e1e;
@@ -64,12 +141,17 @@ main {
   text-align: center;
 }
 main #liste-series {
-  margin: 2rem auto;
-  padding: 2rem auto;
-  background-color: rgb(210, 168, 30);
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 main #liste-series h2 {
   margin-bottom: 1rem;
+  color: #00adb5;
+  text-align: center;
+  font-size: 1.5rem;
 }
 main #liste-series .card-container {
   display: flex;
@@ -105,8 +187,9 @@ main #liste-series .card-container .card button:hover {
 }
 
 footer {
+  height: 100px;
+  align-content: center;
   text-align: center;
   padding: 1rem;
   background: #1f1f1f;
-  margin-top: 2rem;
 }/*# sourceMappingURL=style.css.map */

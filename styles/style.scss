@@ -1,4 +1,5 @@
 @import 'mixin/__index';
+@import 'mixin/lists-styles';
 
 :root {
     --bg-color: #121212;
@@ -73,12 +74,17 @@ main {
     
     #liste-series {
         // background-color: lime;
-        margin: 2rem auto;
-        padding: 2rem auto;
-        background-color: rgb(210, 168, 30);
+        margin: 2rem 0;
+        padding: 1rem;
+        border-radius: 8px;
+        background-color: #1e1e1e;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
         h2 {
             margin-bottom: 1rem;
+            color: #00adb5;
+            text-align: center;
+            font-size: 1.5rem;
         }
 
         .card-container {
@@ -122,8 +128,11 @@ main {
 }
 
 footer {
+    height: 100px;
+    align-content: center;
     text-align: center;
     padding: 1rem;
     background: #1f1f1f;
-    margin-top: 2rem;
+    // margin-top: 2rem;
+    // bottom: 0;
 }
