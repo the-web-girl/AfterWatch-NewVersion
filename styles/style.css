@@ -1,1 +1,112 @@
-/*# sourceMappingURL=style.css.map */
+:root {
+  --bg-color: #121212;
+  --bg-color2: #1e1e1e;
+  --color-txt: #fff;
+  --color-txt2: #000;
+  --btn-link:#00adb5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sr-only {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+html {
+  font-size: 90%;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--bg-color);
+  color: var(--color-txt);
+}
+
+header {
+  background-color: burlywood;
+  padding: 1rem;
+  text-align: center;
+  min-height: 150px;
+}
+header h1 {
+  margin: 0;
+}
+header nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+header nav ul li a {
+  color: #00adb5;
+  text-decoration: none;
+}
+
+main {
+  background-color: chocolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+main #liste-series {
+  margin: 2rem auto;
+  padding: 2rem auto;
+  background-color: rgb(210, 168, 30);
+}
+main #liste-series h2 {
+  margin-bottom: 1rem;
+}
+main #liste-series .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+main #liste-series .card-container .card {
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 0 10px #000;
+}
+main #liste-series .card-container .card img {
+  width: 100%;
+  height: auto;
+}
+main #liste-series .card-container .card h3 {
+  margin: 0.5rem 0;
+}
+main #liste-series .card-container .card button {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #00adb5;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+main #liste-series .card-container .card button:hover {
+  background-color: #008b93;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1f1f1f;
+  margin-top: 2rem;
+}/*# sourceMappingURL=style.css.map */

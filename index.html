@@ -31,7 +31,60 @@
     </header>
 
     <main>
+        <section id="liste-series">
+            <h2>Séries & Films populaires</h2>
 
+            <div class="card-container" id="card-container">
+
+                <article class="card" data-title="Breaking Bad" data-actors="Bryan Cranston" data-director="Vince Gilligan" data-genre="Drame, Crime">
+                    <a href="detail.html?title=Breaking%20Bad">
+                        <img src="assets/breakingbad.jpg" alt="Breaking Bad">
+                        <h3>Breaking Bad</h3>
+                    </a>
+                    <button data-title="Breaking Bad">+ Ajouter</button>
+                </article>
+
+                <article class="card" data-title="Stranger Things" data-actors="Millie Bobby Brown" data-director="The Duffer Brothers" data-genre="Science-fiction, Horreur">
+                    <a href="detail.html?title=Stranger%20Things">
+                        <img src="assets/strangerthings.jpg" alt="Stranger Things">
+                        <h3>Stranger Things</h3>
+                    </a>
+                    <button data-title="Stranger Things">+ Ajouter</button>
+                </article>
+
+                <article class="card" data-title="Interstellar" data-actors="Matthew McConaughey" data-director="Christopher Nolan" data-genre="Science-fiction, Drame">
+                    <a href="detail.html?title=Interstellar">
+                        <img src="assets/interstellar.jpg" alt="Interstellar">
+                        <h3>Interstellar</h3>
+                    </a>
+                    <button data-title="Interstellar">+ Ajouter</button>
+                </article>
+                
+                <article class="card" data-title="Star Wars" data-actors="Harrisson Ford" data-director="George Lucas" data-genre="Science-fiction, Action, Drame">
+                    <a href="detail.html?title=StarWars">
+                        <img src="assets/StarWars.jpg" alt="StarWars">
+                        <h3>StarWars</h3>
+                    </a>
+                    <button data-title="StarWars">+ Ajouter</button>
+                </article>
+            </div>
+        </section>
+
+        <section id="watchlist">
+            <h2>🎞️ Ma Watchlist</h2>
+            <ul id="liste-watchlist">
+              <!-- Liste dynamique -->
+            </ul>
+          </section>
+          
+
+        <!-- Films & Séries Vus -->
+        <section id="seenlist">
+            <h2>🎬 Films & Séries vus</h2>
+            <ul id="liste-seenlist">
+            <!-- Liste dynamique -->
+            </ul>
+        </section>
     </main>
 
     <footer>
