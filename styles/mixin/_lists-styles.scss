@@ -1,8 +1,8 @@
 #watchlist,  #seenlist {
     margin: 2rem 0;
     padding: 1rem;
+    background-color: var(--bg-color2);
     border-radius: 8px;
-    background-color: #1e1e1e;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 80%;
 
@@ -17,7 +17,7 @@
             padding: 1rem;
             background-color: #2a2a2a;
             border-radius: 5px;
-            color: #f0f0f0;
+            color: var(--color-txt);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,17 +44,17 @@
 
 #watchlist {
     h2 {
-        color: #f39c12;
+        color: var(--highlight);
     }
     li {
-        border: 2px solid #f39c12;
+        border: 2px solid var(--highlight);
 
         button {
-            background-color: #f39c12;
+            background-color: var(--highlight);
 
             &:hover,
             &:focus {
-                background-color: #e67e22;
+                background-color: var(--warning);
             }
         }
     }
@@ -63,17 +63,16 @@
 #seenlist {
     h2 {
         /* color: #2ecc71; */
-        color: #2ecc71; /* Couleur du titre */
+        color: var(--success); /* Couleur du titre */
         font-size: 1.5rem;
         font-weight: bold;
         text-align: center;
         visibility: visible !important;  /* Assurez-vous que la visibilité est activée */
     }
     li {
-        border: 2px solid #2ecc71;
-
+        border: 2px solid var(--success);
         button {
-            background-color: #2ecc71;
+            background-color: var(--success);
 
             &:hover,
             &:focus {
@@ -85,7 +84,9 @@
 }
 
 /* Accessibilité - Focus visible */
-button:focus {
-    outline: 3px solid #00adb5;
-    outline-offset: 2px;
+
+button:focus,
+a:focus {
+  outline: 3px solid var(--btn-link);
+  outline-offset: 2px;
 }

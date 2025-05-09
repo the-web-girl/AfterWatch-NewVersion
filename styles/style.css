@@ -2,8 +2,8 @@
 #watchlist, #seenlist {
   margin: 2rem 0;
   padding: 1rem;
+  background-color: var(--bg-color2);
   border-radius: 8px;
-  background-color: #1e1e1e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   width: 80%;
 }
@@ -18,7 +18,7 @@
   padding: 1rem;
   background-color: #2a2a2a;
   border-radius: 5px;
-  color: #f0f0f0;
+  color: var(--color-txt);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,39 +39,40 @@
 }
 
 #watchlist h2 {
-  color: #f39c12;
+  color: var(--highlight);
 }
 #watchlist li {
-  border: 2px solid #f39c12;
+  border: 2px solid var(--highlight);
 }
 #watchlist li button {
-  background-color: #f39c12;
+  background-color: var(--highlight);
 }
 #watchlist li button:hover, #watchlist li button:focus {
-  background-color: #e67e22;
+  background-color: var(--warning);
 }
 
 #seenlist h2 {
   /* color: #2ecc71; */
-  color: #2ecc71; /* Couleur du titre */
+  color: var(--success); /* Couleur du titre */
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   visibility: visible !important; /* Assurez-vous que la visibilité est activée */
 }
 #seenlist li {
-  border: 2px solid #2ecc71;
+  border: 2px solid var(--success);
 }
 #seenlist li button {
-  background-color: #2ecc71;
+  background-color: var(--success);
 }
 #seenlist li button:hover, #seenlist li button:focus {
   background-color: #27ae60;
 }
 
 /* Accessibilité - Focus visible */
-button:focus {
-  outline: 3px solid #00adb5;
+button:focus,
+a:focus {
+  outline: 3px solid var(--btn-link);
   outline-offset: 2px;
 }
 
@@ -81,6 +82,9 @@ button:focus {
   --color-txt: #fff;
   --color-txt2: #000;
   --btn-link:#00adb5;
+  --highlight: #f39c12;
+  --success: #2ecc71;
+  --warning: #e67e22;
 }
 
 * {
@@ -113,7 +117,7 @@ body {
 }
 
 header {
-  background-color: burlywood;
+  background: var(--bg-color);
   padding: 1rem;
   text-align: center;
   min-height: 150px;
@@ -129,12 +133,12 @@ header nav ul {
   gap: 1rem;
 }
 header nav ul li a {
-  color: #00adb5;
+  color: var(--btn-link);
   text-decoration: none;
 }
 
 main {
-  background-color: chocolate;
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,29 +147,31 @@ main {
 main #liste-series {
   margin: 2rem 0;
   padding: 1rem;
+  background-color: var(--bg-color2);
   border-radius: 8px;
-  background-color: #1e1e1e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 90%;
   /* Modale */
 }
 main #liste-series h2 {
   margin-bottom: 1rem;
-  color: #00adb5;
-  text-align: center;
+  color: var(--btn-link);
   font-size: 1.5rem;
+  text-align: center;
 }
 main #liste-series .card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  justify-content: center;
 }
 main #liste-series .card-container .card {
-  background: #1e1e1e;
+  background: var(--bg-color2);
   border-radius: 10px;
-  overflow: hidden;
   width: 200px;
-  text-align: center;
   box-shadow: 0 0 10px #000;
+  overflow: hidden;
+  text-align: center;
 }
 main #liste-series .card-container .card img {
   width: 100%;
@@ -178,20 +184,21 @@ main #liste-series .card-container .card button {
   margin: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background: #00adb5;
+  background: var(--btn-link);
   color: white;
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
 }
 main #liste-series .card-container .card button:hover {
   background-color: #008b93;
 }
-main #liste-series #modal {
+main #liste-series .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
+  color: black;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -200,10 +207,10 @@ main #liste-series #modal {
   z-index: 1000;
   display: none;
 }
-main #liste-series #modal [hidden] {
-  display: none;
+main #liste-series .modal .modal-content {
+  position: relative;
 }
-main #liste-series #modal #close-modal {
+main #liste-series .modal .modal-content #close-modal {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -212,13 +219,42 @@ main #liste-series #modal #close-modal {
   font-size: 1.5rem;
   cursor: pointer;
 }
-main #liste-series #modal h2 {
+main #liste-series .modal .modal-content h2 {
   margin-top: 0;
 }
-main #liste-series #modal img {
+main #liste-series .modal .modal-content img {
   max-width: 100%;
   height: auto;
   margin-bottom: 1rem;
+}
+main #liste-series .modal .modal-content .modal-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--btn-link);
+  text-decoration: underline;
+}
+main #liste-series .modal .modal-content #season-selector {
+  margin-top: 1rem;
+}
+main #liste-series .modal .modal-content #season-selector #season-select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+}
+main #liste-series .modal .modal-content #season-selector #add-season {
+  padding: 0.5rem 1rem;
+  background-color: var(--btn-link);
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+main #liste-series .modal .modal-content #season-selector #add-season:hover {
+  background-color: #008b93;
+}
+main #liste-series .modal[open],
+main #liste-series .modal.active {
+  display: block;
 }
 
 footer {

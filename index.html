@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AfterWatch - Accueil</title>
-
-    <!-- LINKS -->
-<link rel="stylesheet" href="./styles/style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AfterWatch - Accueil</title>
+  <link rel="stylesheet" href="./styles/style.css" />
 </head>
 <body>
-
     <header>
         <h1>🎬 AfterWatch</h1>
-
         <nav>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
@@ -21,92 +16,84 @@
                 <li><a href="#seenlist">Films & Séries vus</a></li>
             </ul>
         </nav>
-
+      
+        <!-- Barre de recherche -->
         <form class="search-bar" role="search" aria-label="Recherche dans les contenus" onsubmit="return false;">
-            <label for="search-input" class="visually-hidden">Rechercher un titre, un acteur, un réalisateur ou un genre</label>
-            <input type="text" id="search-input" name="search" placeholder="Rechercher par titre, acteur, réalisateur, genre..." aria-describedby="search-error">
+            <label for="search-input" class="sr-only">Rechercher un titre, acteur, genre...</label>
+            <input
+                type="text"
+                id="search-input"
+                name="search"
+                placeholder="Titre, acteur, genre..."
+                aria-describedby="search-error"
+            />
             <button type="button" id="search-button" aria-label="Lancer la recherche">Rechercher</button>
-            <p id="search-error" class="sr-only" role="alert" aria-live="polite"></p>
+            <p id="search-error" class="sr-only" role="status" aria-live="polite"></p>
         </form>
     </header>
-
+      
     <main>
+        <!-- Section cartes dynamiques -->
         <section id="liste-series">
             <h2>Séries & Films populaires</h2>
-
             <div class="card-container" id="card-container">
-
-                <!-- <article class="card" data-title="Breaking Bad" data-actors="Bryan Cranston" data-director="Vince Gilligan" data-genre="Drame, Crime">
-                    <a href="detail.html?title=Breaking%20Bad">
-                        <img src="assets/breakingbad.jpg" alt="Breaking Bad">
-                        <h3>Breaking Bad</h3>
-                    </a>
-                    <button data-title="Breaking Bad">+ Ajouter</button>
-                </article>
-
-                <article class="card" data-title="Stranger Things" data-actors="Millie Bobby Brown" data-director="The Duffer Brothers" data-genre="Science-fiction, Horreur">
-                    <a href="detail.html?title=Stranger%20Things">
-                        <img src="assets/strangerthings.jpg" alt="Stranger Things">
-                        <h3>Stranger Things</h3>
-                    </a>
-                    <button data-title="Stranger Things">+ Ajouter</button>
-                </article>
-
-                <article class="card" data-title="Interstellar" data-actors="Matthew McConaughey" data-director="Christopher Nolan" data-genre="Science-fiction, Drame">
-                    <a href="detail.html?title=Interstellar">
-                        <img src="assets/interstellar.jpg" alt="Interstellar">
-                        <h3>Interstellar</h3>
-                    </a>
-                    <button data-title="Interstellar">+ Ajouter</button>
-                </article>
-                
-                <article class="card" data-title="Star Wars" data-actors="Harrisson Ford" data-director="George Lucas" data-genre="Science-fiction, Action, Drame">
-                    <a href="detail.html?title=StarWars">
-                        <img src="assets/StarWars.jpg" alt="StarWars">
-                        <h3>StarWars</h3>
-                    </a>
-                    <button data-title="StarWars">+ Ajouter</button>
-                </article> -->
+                <!-- Cartes générées dynamiquement via main.js -->
             </div>
-
-            <!-- Modale -->
-            <div id="modal" class="modal" hidden>
+        
+            <!-- Modale (détails d’un film ou série) -->
+            <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
                 <div class="modal-content">
-                <span id="close-modal" class="close-button">&times;</span>
+                <button id="close-modal" class="close-button" aria-label="Fermer la modale">✖</button>
+        
                 <h2 id="modal-title"></h2>
-                <img id="modal-image" src="" alt="">
+                <img id="modal-image" src="" alt="Affiche de l’œuvre" />
                 <p id="modal-description"></p>
+        
                 <p><strong>Genres :</strong> <span id="modal-genres"></span></p>
                 <p><strong>Date de sortie :</strong> <span id="modal-release-date"></span></p>
                 <p><strong>Note :</strong> <span id="modal-rating"></span></p>
+        
+                <!-- Sélection de saison (uniquement pour les séries) -->
+                <div id="season-selector" hidden>
+                    <label for="season-select"><strong>Ajouter une saison :</strong></label>
+                    <select id="season-select" aria-label="Choisir une saison"></select>
+                    <button id="add-season">Ajouter cette saison à la Watchlist</button>
+                </div>
+        
+                <!-- Lien TMDb -->
+                <a id="full-details-link" href="#" target="_blank" class="modal-link">Voir la fiche complète sur TMDb</a>
                 </div>
             </div>
-  
         </section>
-
+      
+        <!-- Résultats de recherche -->
+        <section id="search-results" hidden>
+            <h2>Résultats de la recherche</h2>
+            <div class="card-container" id="search-results-container"></div>
+        </section>
+      
+        <!-- Watchlist -->
         <section id="watchlist">
             <h2>🎞️ Ma Watchlist</h2>
-            <ul id="liste-watchlist">
-              <!-- Liste dynamique -->
-            </ul>
-          </section>
-          
-
-        <!-- Films & Séries Vus -->
+            <ul id="liste-watchlist"></ul>
+        </section>
+      
+        <!-- Seenlist -->
         <section id="seenlist">
             <h2>🎬 Films & Séries vus</h2>
-            <ul id="liste-seenlist">
-            <!-- Liste dynamique -->
-            </ul>
+            <ul id="liste-seenlist"></ul>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 AfterWatch - Projet HTML/SCSS/JS</p>
     </footer>
-    
-    <!-- SCRIPTS -->
-     <script src="./scripts/search.js"></script>
-     <script src="./scripts/main.js"></script>
+
+    <!-- JS -->
+    <script>
+      const TMDB_API_KEY = '124bdc1601294994a241722466e53891';
+    </script>
+    <script src="./scripts/search.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 </html>

@@ -8,6 +8,10 @@
     --color-txt: #fff;
     --color-txt2: #000;
     --btn-link:#00adb5;
+
+    --highlight: #f39c12;
+    --success: #2ecc71;
+    --warning: #e67e22;
 }
 
 // RESET
@@ -35,8 +39,7 @@ body {
 }
 
 header {
-    // background: var(--bg-color);
-    background-color: burlywood;
+    background: var(--bg-color);
     padding: 1rem;
     text-align: center;
     min-height: 150px;
@@ -55,7 +58,7 @@ header {
 
             li {
                 a {
-                color: #00adb5;
+                color: var(--btn-link);
                 text-decoration: none;
                 }
 
@@ -65,41 +68,40 @@ header {
 }
 
 main {
-    // background-color: var(--bg-color);
-    background-color: chocolate;
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    // padding: 1rem auto;
     
     #liste-series {
-        // background-color: lime;
         margin: 2rem 0;
         padding: 1rem;
+        background-color: var(--bg-color2);
         border-radius: 8px;
-        background-color: #1e1e1e;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        width: 90%;
 
         h2 {
             margin-bottom: 1rem;
-            color: #00adb5;
-            text-align: center;
+            color: var(--btn-link);
             font-size: 1.5rem;
+            text-align: center;
         }
 
         .card-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
+            justify-content: center;
 
             .card {
-                background: #1e1e1e;
+                background: var(--bg-color2);
                 border-radius: 10px;
-                overflow: hidden;
                 width: 200px;
-                text-align: center;
                 box-shadow: 0 0 10px #000;
+                overflow: hidden;
+                text-align: center;
 
                 img {
                     width: 100%;
@@ -114,25 +116,26 @@ main {
                     margin: 1rem;
                     padding: 0.5rem 1rem;
                     border: none;
-                    background: #00adb5;
+                    background: var(--btn-link);
                     color: white;
-                    cursor: pointer;
                     border-radius: 5px;
+                    cursor: pointer;
               
                     &:hover {
-                      background-color: #008b93;
+                       background-color: #008b93;
                     }
                 }
             }
         }
 
-        /* Modale */
-#modal {
+    /* Modale */
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
+    color: black;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -141,32 +144,64 @@ main {
     z-index: 1000;
     display: none;
 
-    & [hidden]{
-        display: none;
-    }
+    .modal-content {
+        position: relative;
 
-    #close-modal {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: transparent;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+        #close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
-    h2 {
-        margin-top: 0;
-    }
+        h2 {
+            margin-top: 0;
+        }
 
-    img {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 1rem;
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .modal-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--btn-link);
+            text-decoration: underline;
+        }
+
+        #season-selector {
+            margin-top: 1rem;
+
+            #season-select {
+                padding: 0.5rem;
+                border-radius: 5px;
+                margin-right: 0.5rem;
+            }
+            #add-season {
+                padding: 0.5rem 1rem;
+                background-color: var(--btn-link);
+                border: none;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #008b93;
+                }
+            }
+        }
     }
 
 }
-
+.modal[open],
+.modal.active {
+  display: block;
+}
 // #modal[hidden] {
 //     display: none;
 // }

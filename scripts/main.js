@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalRating = document.getElementById('modal-rating');
     const closeModalBtn = document.getElementById('close-modal');
   
+    const fullDetailsLink = document.getElementById('full-details-link');
+    const seasonSelector = document.getElementById('season-selector');
+    const seasonSelect = document.getElementById('season-select');
+    const addSeasonBtn = document.getElementById('add-season');
+  
     const TITLES = [
       "Breaking Bad",
       "Stranger Things",
@@ -23,102 +28,134 @@ document.addEventListener('DOMContentLoaded', () => {
       "Star Wars"
     ];
   
-    // Chargement des cartes
+    // Chargement initial
+    loadCards();
+    loadWatchlist();
+    loadSeenlist();
+  
     async function loadCards() {
       for (const title of TITLES) {
-        try {
-          const data = await fetchMovieDetails(title);
-          if (data) {
-            createCard(data);
-          } else {
-            console.warn(`Aucun résultat pour "${title}"`);
-          }
-        } catch (err) {
-          console.error('Erreur de récupération TMDb :', err);
+        const data = await fetchSearchResult(title);
+        if (data) {
+          createCard(data);
         }
       }
     }
   
-    // Récupération des détails du film/série
-    async function fetchMovieDetails(title) {
-      const response = await fetch(`${API_BASE}/search/multi?api_key=${API_KEY}&language=fr-FR&query=${encodeURIComponent(title)}`);
-      const data = await response.json();
-      return data.results?.[0];
+    async function fetchSearchResult(query) {
+      try {
+        const res = await fetch(`${API_BASE}/search/multi?api_key=${API_KEY}&language=fr-FR&query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        return data.results?.[0] || null;
+      } catch (err) {
+        console.error('Erreur API :', err);
+        return null;
+      }
     }
   
-    // Création d'une carte
     function createCard(data) {
       const article = document.createElement('article');
       article.className = 'card';
-      article.dataset.title = data.title || data.name;
+      article.dataset.title = data.title || data.name || '';
+      article.dataset.actors = '';
+      article.dataset.director = '';
+      article.dataset.genre = '';
+  
+      const title = data.title || data.name;
+      const imgSrc = data.poster_path ? IMG_BASE + data.poster_path : 'https://via.placeholder.com/300x450?text=No+Image';
   
       article.innerHTML = `
-        <img src="${IMG_BASE + data.poster_path}" alt="${data.title || data.name}">
-        <h3>${data.title || data.name}</h3>
-        <button data-title="${data.title || data.name}">+ Ajouter</button>
+        <img src="${imgSrc}" alt="Affiche de ${title}">
+        <h3>${title}</h3>
       `;
   
-      // Événement pour afficher la modale
-      article.addEventListener('click', (e) => {
-        if (e.target.tagName.toLowerCase() === 'button') return;
-        e.preventDefault();
-        showModal(data);
-      });
-  
-      // Événement pour ajouter à la watchlist
-      const addButton = article.querySelector('button[data-title]');
-      addButton.addEventListener('click', () => {
-        const title = addButton.dataset.title;
+      const addBtn = document.createElement('button');
+      addBtn.textContent = '+ Ajouter';
+      addBtn.dataset.title = title;
+      addBtn.onclick = () => {
         addToWatchlist(title);
-        addButton.disabled = true;
-      });
+        addBtn.disabled = true;
+      };
+  
+      const detailsBtn = document.createElement('button');
+      detailsBtn.textContent = 'Voir fiche complète';
+      detailsBtn.onclick = () => fetchDetailsAndShowModal(data.media_type || 'movie', data.id);
+  
+      article.appendChild(addBtn);
+      article.appendChild(detailsBtn);
   
       cardContainer.appendChild(article);
     }
   
-    // Affichage de la modale
-    function showModal(data) {
-      modalTitle.textContent = data.title || data.name;
-      modalImage.src = IMG_BASE + data.poster_path;
-      modalImage.alt = `Affiche de ${data.title || data.name}`;
-      modalDescription.textContent = data.overview || "Aucune description disponible.";
-      modalGenres.textContent = data.genre_ids ? data.genre_ids.join(', ') : "Genres inconnus";
-      modalReleaseDate.textContent = data.release_date || "Date inconnue";
-      modalRating.textContent = data.vote_average ?? "Non noté";
+    async function fetchDetailsAndShowModal(type, id) {
+      try {
+        const res = await fetch(`${API_BASE}/${type}/${id}?api_key=${API_KEY}&language=fr-FR`);
+        const details = await res.json();
+        updateModal(details, type);
+      } catch (err) {
+        console.error("Erreur lors du chargement de la fiche détaillée :", err);
+      }
+    }
+  
+    function updateModal(details, type) {
+      modalTitle.textContent = details.name || details.title;
+      modalImage.src = IMG_BASE + details.poster_path;
+      modalImage.alt = `Affiche de ${details.name || details.title}`;
+      modalDescription.textContent = details.overview || "Aucune description disponible.";
+      modalGenres.textContent = details.genres?.map(g => g.name).join(', ') || "Genres inconnus";
+      modalReleaseDate.textContent = details.first_air_date || details.release_date || "Date inconnue";
+      modalRating.textContent = details.vote_average ?? "Non noté";
+  
+      fullDetailsLink.href = `https://www.themoviedb.org/${type}/${details.id}`;
+      fullDetailsLink.style.display = 'inline-block';
+  
+      if (type === 'tv' && details.seasons) {
+        seasonSelector.hidden = false;
+        seasonSelect.innerHTML = '';
+        details.seasons.forEach(season => {
+          const opt = document.createElement('option');
+          opt.value = season.season_number;
+          opt.textContent = `Saison ${season.season_number}`;
+          seasonSelect.appendChild(opt);
+        });
+      } else {
+        seasonSelector.hidden = true;
+      }
   
       openModal();
     }
   
+    addSeasonBtn.addEventListener('click', () => {
+      const saison = seasonSelect.value;
+      const titre = modalTitle.textContent;
+      addToWatchlist(`${titre} - Saison ${saison}`);
+    });
+  
     function openModal() {
       modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
       modal.focus();
       trapFocus(modal);
     }
   
     function closeModal() {
       modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
       releaseFocusTrap();
     }
   
     closeModalBtn.addEventListener('click', closeModal);
-  
-    document.addEventListener('keydown', (e) => {
-      if (!modal.hidden && e.key === 'Escape') {
-        closeModal();
-      }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
     });
   
     // Gestion du focus dans la modale
-    let focusableElements = [];
-    let firstFocusable, lastFocusable;
+    let focusableElements = [], firstFocusable, lastFocusable;
   
-    function trapFocus(element) {
-      focusableElements = element.querySelectorAll(
-        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-      );
+    function trapFocus(el) {
+      focusableElements = el.querySelectorAll('a[href], button:not([disabled]), textarea, input, select');
       firstFocusable = focusableElements[0];
       lastFocusable = focusableElements[focusableElements.length - 1];
-  
       document.addEventListener('keydown', handleFocusTrap);
     }
   
@@ -128,21 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
   
     function handleFocusTrap(e) {
       if (e.key !== 'Tab') return;
-  
-      if (e.shiftKey) {
-        if (document.activeElement === firstFocusable) {
-          e.preventDefault();
-          lastFocusable.focus();
-        }
-      } else {
-        if (document.activeElement === lastFocusable) {
-          e.preventDefault();
-          firstFocusable.focus();
-        }
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        e.preventDefault(); lastFocusable.focus();
+      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+        e.preventDefault(); firstFocusable.focus();
       }
     }
   
-    // Gestion des listes
+    // Gestion Watchlist
     function loadWatchlist() {
       const list = JSON.parse(localStorage.getItem('watchlist')) || [];
       watchlistElement.innerHTML = '';
@@ -155,10 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
         removeBtn.onclick = () => removeFromWatchlist(title);
         li.appendChild(removeBtn);
   
-        const seenButton = document.createElement('button');
-        seenButton.textContent = 'Ajouter à la Seenlist';
-        seenButton.onclick = () => addToSeenlist(title);
-        li.appendChild(seenButton);
+        const seenBtn = document.createElement('button');
+        seenBtn.textContent = 'Ajouter à la Seenlist';
+        seenBtn.onclick = () => addToSeenlist(title);
+        li.appendChild(seenBtn);
   
         watchlistElement.appendChild(li);
       });
@@ -211,10 +241,4 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('seenlist', JSON.stringify(list));
       loadSeenlist();
     }
-  
-    // Initialisation
-    loadCards();
-    loadWatchlist();
-    loadSeenlist();
   });
-  
