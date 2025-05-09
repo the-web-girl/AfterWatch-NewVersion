@@ -146,6 +146,7 @@ main #liste-series {
   border-radius: 8px;
   background-color: #1e1e1e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Modale */
 }
 main #liste-series h2 {
   margin-bottom: 1rem;
@@ -184,6 +185,40 @@ main #liste-series .card-container .card button {
 }
 main #liste-series .card-container .card button:hover {
   background-color: #008b93;
+}
+main #liste-series #modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+  z-index: 1000;
+  display: none;
+}
+main #liste-series #modal [hidden] {
+  display: none;
+}
+main #liste-series #modal #close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+main #liste-series #modal h2 {
+  margin-top: 0;
+}
+main #liste-series #modal img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 footer {
