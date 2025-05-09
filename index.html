@@ -36,7 +36,7 @@
 
             <div class="card-container" id="card-container">
 
-                <article class="card" data-title="Breaking Bad" data-actors="Bryan Cranston" data-director="Vince Gilligan" data-genre="Drame, Crime">
+                <!-- <article class="card" data-title="Breaking Bad" data-actors="Bryan Cranston" data-director="Vince Gilligan" data-genre="Drame, Crime">
                     <a href="detail.html?title=Breaking%20Bad">
                         <img src="assets/breakingbad.jpg" alt="Breaking Bad">
                         <h3>Breaking Bad</h3>
@@ -66,7 +66,20 @@
                         <h3>StarWars</h3>
                     </a>
                     <button data-title="StarWars">+ Ajouter</button>
-                </article>
+                </article> -->
+            </div>
+
+              <!-- Modale -->
+            <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+                <div class="modal-content">
+                <button id="close-modal" aria-label="Fermer la modale">✖</button>
+                <h2 id="modal-title"></h2>
+                <img id="modal-image" src="" alt="">
+                <p id="modal-description"></p>
+                <p><strong>Genres :</strong> <span id="modal-genres"></span></p>
+                <p><strong>Date de sortie :</strong> <span id="modal-release-date"></span></p>
+                <p><strong>Note moyenne :</strong> <span id="modal-rating"></span></p>
+                </div>
             </div>
         </section>
 
