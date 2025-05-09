@@ -1,0 +1,129 @@
+@import 'mixin/__index';
+
+:root {
+    --bg-color: #121212;
+    --bg-color2: #1e1e1e;
+    --color-txt: #fff;
+    --color-txt2: #000;
+    --btn-link:#00adb5;
+}
+
+// RESET
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sr-only {
+    @include sr-only;
+}
+
+html {
+    // font-size: 62.5%;
+    font-size: 90%;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--color-txt);
+}
+
+header {
+    // background: var(--bg-color);
+    background-color: burlywood;
+    padding: 1rem;
+    text-align: center;
+    min-height: 150px;
+
+    h1 {
+        margin: 0;
+    }
+
+    nav {
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+
+            li {
+                a {
+                color: #00adb5;
+                text-decoration: none;
+                }
+
+            }
+        }
+    }
+}
+
+main {
+    // background-color: var(--bg-color);
+    background-color: chocolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    // padding: 1rem auto;
+    
+    #liste-series {
+        // background-color: lime;
+        margin: 2rem auto;
+        padding: 2rem auto;
+        background-color: rgb(210, 168, 30);
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+
+            .card {
+                background: #1e1e1e;
+                border-radius: 10px;
+                overflow: hidden;
+                width: 200px;
+                text-align: center;
+                box-shadow: 0 0 10px #000;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+              
+                h3 {
+                    margin: 0.5rem 0;
+                }
+
+                button {
+                    margin: 1rem;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    background: #00adb5;
+                    color: white;
+                    cursor: pointer;
+                    border-radius: 5px;
+              
+                    &:hover {
+                      background-color: #008b93;
+                    }
+                }
+            }
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #1f1f1f;
+    margin-top: 2rem;
+}
