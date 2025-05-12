@@ -207,6 +207,36 @@ main {
 // }
   
     }
+
+    #search-results-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        // background-color: lawngreen;
+
+        .card {
+            max-width: 175px;
+            height: auto;
+            margin: 5px;
+            border: 2px solid var(--btn-link);
+
+            img {
+                width: 50%;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            button {
+                background-color: var(--btn-link);
+                border: var(--bg-color2) 1px solid;
+                margin: 5px auto;
+                font-size: 1rem;
+                width: 70%;
+            }
+        }
+    }
 }
 
 footer {
