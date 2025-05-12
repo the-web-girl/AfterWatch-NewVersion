@@ -25,10 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "Breaking Bad",
       "Stranger Things",
       "Interstellar",
-      "Star Wars"
+      "Star Wars",
+      "The Mandalorian",
+      "The Rock",
+      "MARVEL",
+      "Dr House"
     ];
   
-    // Chargement initial
     loadCards();
     loadWatchlist();
     loadSeenlist();
@@ -63,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
       const title = data.title || data.name;
       const imgSrc = data.poster_path ? IMG_BASE + data.poster_path : 'https://via.placeholder.com/300x450?text=No+Image';
+      const mediaType = data.media_type || (data.first_air_date ? 'tv' : 'movie');
   
       article.innerHTML = `
         <img src="${imgSrc}" alt="Affiche de ${title}">
@@ -70,18 +74,19 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
   
       const addBtn = document.createElement('button');
-      addBtn.textContent = '+ Ajouter';
-      addBtn.dataset.title = title;
-      addBtn.onclick = () => {
-        addToWatchlist(title);
-        addBtn.disabled = true;
-      };
+      addBtn.textContent = '+ Ajouter à la Watchlist';
+      addBtn.onclick = () => addToWatchlist(title);
+  
+      const seenBtn = document.createElement('button');
+      seenBtn.textContent = 'Ajouter à la Seenlist';
+      seenBtn.onclick = () => addToSeenlist(title);
   
       const detailsBtn = document.createElement('button');
       detailsBtn.textContent = 'Voir fiche complète';
-      detailsBtn.onclick = () => fetchDetailsAndShowModal(data.media_type || 'movie', data.id);
+      detailsBtn.onclick = () => fetchDetailsAndShowModal(mediaType, data.id);
   
       article.appendChild(addBtn);
+      article.appendChild(seenBtn);
       article.appendChild(detailsBtn);
   
       cardContainer.appendChild(article);
@@ -149,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape' && !modal.hidden) closeModal();
     });
   
-    // Gestion du focus dans la modale
     let focusableElements = [], firstFocusable, lastFocusable;
   
     function trapFocus(el) {
@@ -172,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   
-    // Gestion Watchlist
     function loadWatchlist() {
       const list = JSON.parse(localStorage.getItem('watchlist')) || [];
       watchlistElement.innerHTML = '';
@@ -241,4 +244,74 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('seenlist', JSON.stringify(list));
       loadSeenlist();
     }
+  
+    const footer = document.querySelector('footer');
+    const exportBtn = document.createElement('button');
+    exportBtn.textContent = '📁 Exporter mes listes';
+    exportBtn.addEventListener('click', exportLists);
+    footer.appendChild(exportBtn);
+  
+    function exportLists() {
+      const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+      const seenlist = JSON.parse(localStorage.getItem('seenlist')) || [];
+  
+      const blob = new Blob([
+        JSON.stringify({
+          watchlist,
+          seenlist,
+          exportedAt: new Date().toISOString()
+        }, null, 2)
+      ], { type: 'application/json' });
+  
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'afterwatch-listes.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   });
+  
+  // ... Tout le code précédent (inchangé) ...
+
+  // Bouton d'importation JSON
+  const importLabel = document.createElement('label');
+  importLabel.textContent = '📂 Importer mes listes';
+  importLabel.setAttribute('for', 'import-file');
+  importLabel.style.cursor = 'pointer';
+  importLabel.style.marginLeft = '1rem';
+
+  const importInput = document.createElement('input');
+  importInput.type = 'file';
+  importInput.id = 'import-file';
+  importInput.accept = '.json';
+  importInput.style.display = 'none';
+  importInput.addEventListener('change', importLists);
+
+  footer.appendChild(importBtn);
+  footer.appendChild(importLabel);
+  footer.appendChild(importInput);
+
+  function importLists(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (Array.isArray(data.watchlist)) {
+          localStorage.setItem('watchlist', JSON.stringify(data.watchlist));
+        }
+        if (Array.isArray(data.seenlist)) {
+          localStorage.setItem('seenlist', JSON.stringify(data.seenlist));
+        }
+        loadWatchlist();
+        loadSeenlist();
+        alert('Listes importées avec succès !');
+      } catch (err) {
+        alert('Fichier invalide. Veuillez sélectionner un fichier JSON exporté depuis AfterWatch.');
+      }
+    };
+    reader.readAsText(file);
+  }

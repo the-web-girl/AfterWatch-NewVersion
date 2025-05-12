@@ -256,6 +256,30 @@ main #liste-series .modal[open],
 main #liste-series .modal.active {
   display: block;
 }
+main #search-results-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+main #search-results-container .card {
+  max-width: 175px;
+  height: auto;
+  margin: 5px;
+  border: 2px solid var(--btn-link);
+}
+main #search-results-container .card img {
+  width: 50%;
+}
+main #search-results-container .card h3 {
+  font-size: 1rem;
+}
+main #search-results-container .card button {
+  background-color: var(--btn-link);
+  border: var(--bg-color2) 1px solid;
+  margin: 5px auto;
+  font-size: 1rem;
+  width: 70%;
+}
 
 footer {
   height: 100px;
